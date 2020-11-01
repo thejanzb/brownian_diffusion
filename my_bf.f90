@@ -10,7 +10,7 @@ module parameters
     ! Choosing double precision for real here !
     integer, parameter ::  uRp = dRp                           ! User selected Real precision
 
-    !! Constants !!
+    !! Universal Constants !!
     real(kind = uRp), parameter                      :: pi = 4.0_uRp*atan(1.0_uRp)
     real(kind = uRp), parameter                      :: kb = 1.38e-23_uRp
     integer(kind = selected_int_kind(23)), parameter :: av_num = 6023*10**20
@@ -100,7 +100,7 @@ program bro_force
         !! making time and mds arrays for linear regression y = m*x + c
         call append(time, x_lin)
         call append(sum(pos**2)/size(pos), y_lin)
-        if( mod(i, num_steps/10) == 0) write(*,'(I0XA)',advance='no') int(i*100/num_steps), '% ' 
+        if( mod(i, num_steps/10) == 0) write(*,'(I0XA)',advance='no') int(i*100/num_steps), '% '
     end do time_loop
     write(*,*)
     write(*,'(AXES7.1)') 'Number of particles =', real(num_part)
@@ -113,7 +113,7 @@ program bro_force
     write(*,'(AXES11.4)') 'D = m/2 =', u(1)/2.0_uRp
 
     contains
-    
+    !! Append element into array
     subroutine append(element,  array)
         implicit none
         real(kind = uRp), intent(in)  :: element
